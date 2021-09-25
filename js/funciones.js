@@ -15,47 +15,25 @@ const InStock = (quantity, stock) => {
     else return true;   
 }
 
-/* Agregar productos y su cantidad al carrito 
-option = el producto seleccionado por el usuario
-quantity = la cantidad de producto seleccionada por el usuario
-*/ 
-const addToCart =(option, quantity) => {
-    switch(option) {
-        case 1:
-            if(inStock(quantity, rafinaStock)) {
-                cart += (quantity * rafinaPrice);
-                rafinaStock -= quantity
-                alert("Producto agregado al carrito")
-            }
-        break;
-
-        case 2: 
-            if(inStock(quantity, patmosStock)) {
-                cart += (quantity * patmosPrice);
-                patmosStock -= quantity
-                alert("Producto agregado al carrito")
-        }
-    break;
-
-        case 3:
-            if(inStock(quantity, pyrgosStock)) {
-                cart += (quantity * pyrgosPrice);
-                pyrgosStock -= quantity
-                alert("Producto agregado al carrito")
-            }
-        break;
-
-        case 4: 
-        if(inStock(quantity, peryssaStock)) {
-            cart += (quantity * peryssaPrice);
-            peryssaStock -= quantity
-            alert("Producto agregado al carrito")
-        }
-    break;
-
-        default:
-            alert("Función no válida")
+/* ESTA FUNCION EJECUTA EL AGREGADO DE LOS PRODUCTOS SELECCIONADOS AL CARRITO
+OPTION = LA OPCION SELECCIONADA POR EL USUARIO
+QUANTITY = LA CANTIDAD DESEADA POR EL USUARIO */
+const addToCart = (option, quantity) => {
+    const found = products.find((product)=>{product.id === option })
+    if(InStock(quantity, found.stock)) {
+        cart += (quantity * found.price);
+        products[option-1].stock -= quantity;
+        alert(`${found.name} agregado al carrito`);
     }
-    return true;
 }
 
+/* ESTA FUNCION GENERA EL MENU DINÁMICO EN BASE A LOS PCTOS EXISTENTES 
+RETORNA EL ID DEL PRODUCTO ELEGIDO */
+const showMenu = () => {
+    let menu = 'Elija un producto: \n';
+    products.forEach((product)=>{
+        menu += product.id + "-" + product.name + "\n";
+    });
+    menu += (products.length + 1) + "-Salir";
+    return parseInt(prompt(menu));
+}

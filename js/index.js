@@ -2,17 +2,16 @@
 alert ("Bienvenido a Santorini Oficial")
 
 do {
-    let option =  parseInt(prompt(menu))
-    if(option === 5) break;
+    showMenu();
+    let option = showMenu(); 
+    if(option === products.length + 1) break;
     let qty = parseInt(prompt(SelectedQty))
 
     addToCart(option, qty);
 
     resp = prompt('¿Desea agregar más productos al carrito? S/N');
 
-}
-
-while (resp === "S");
+}while (resp === "S" || resp === "s");
 
 if(cart > 0) {
     alert(`Su compra tiene un total de $${cart}`);
