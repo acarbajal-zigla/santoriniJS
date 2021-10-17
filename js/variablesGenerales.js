@@ -9,7 +9,6 @@
 5 - Salir
 `; */
 
-const SelectedQty = `Indique la cantidad de productos que desea`;
 
 let products = [
     {id: 1, name: 'Rafina', price: 1000, stock: 20},

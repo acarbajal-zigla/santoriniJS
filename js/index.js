@@ -22,8 +22,15 @@ for (const product of products) {
     productList.appendChild(li);
 }
 
+// bloque de codigo que (va a ser funcion) inicializa el stock de los productos
+// en funcion del localStorage
+for (let elemento in localStorage){
+    const aux = JSON.parse(elemento);
+    let aux2 = products.find(product=>product.id === aux.productID);
+    aux2 -= parseInt(aux.cantidad);
+}
 
-let formulario = document.getElementById("formularioCompra");
+const formulario = document.getElementById("formularioCompra");
 formulario.addEventListener("submit", (event) =>{
     event.preventDefault()
     const purseName = formulario.inputProducto.value;
@@ -34,17 +41,30 @@ formulario.addEventListener("submit", (event) =>{
         console.log("Item inexistente.");
     }
     else{
+        result = document.getElementById("result");
         if(cantidad <= producto.stock) {
             producto.stock -= cantidad;
-            document.createElement('h3').innerHTML(`${producto.name} agregado al carrito`);
+            console.log(producto.stock)
+            result.innerHTML = `<br>${producto.name} agregado al carrito`;
             localStorage.setItem(localStorage.length, JSON.stringify({"productID":producto.id, "cantidad":cantidad}));
         }
         else{
-            document.createElement('h3').innerHTML(`No hay suficiente stock. Stock disponible ${producto.stock}`);
+            result.innerHTML = `<br>No hay suficiente stock. Stock disponible ${producto.stock}.`;
         }
     }
     formulario.reset();
 });
 
+const botonComprar = document.getElementById("buttonComprar");
+botonComprar.addEventListener("click", showCart);
+
+function showCart(){
+    let saldoTotal = 0;
+    for (let elemento in localStorage){
+        const aux = JSON.parse(elemento);
+        saldoTotal += parseInt(aux.cantidad) * products.find(product=>product.id === aux.productID).price
+    }
+    document.createElement('h3').innerHTML(`El monto total de tu compra es: $${producto.stock}`);
+}
 //alert('¡Gracias por su visita!') 
 
