@@ -19,6 +19,7 @@ const addToCart = (option, quantity) => {
 
 /* ESTA FUNCION GENERA EL MENU DINÁMICO EN BASE A LOS PCTOS EXISTENTES 
 RETORNA EL ID DEL PRODUCTO ELEGIDO */
+/*
 const showMenu = () => {
     let menu = 'Elija un producto: \n';
     products.forEach((product)=>{
@@ -27,3 +28,5 @@ const showMenu = () => {
     menu += (products.length + 1) + "-Salir";
     return parseInt(prompt(menu));
 }
+*/
+
