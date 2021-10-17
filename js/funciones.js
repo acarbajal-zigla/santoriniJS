@@ -7,24 +7,14 @@ Resultado
 TRUE = Hay stock
 FALSE = No hay stock
 */
-const InStock = (quantity, stock) => {
-    if (quantity > stock){
-        alert(`No tenemos suficiente stock, el stock disponible es ${stock}`);
-        return false;
-    }
-    else return true;   
-}
+
 
 /* ESTA FUNCION EJECUTA EL AGREGADO DE LOS PRODUCTOS SELECCIONADOS AL CARRITO
 OPTION = LA OPCION SELECCIONADA POR EL USUARIO
 QUANTITY = LA CANTIDAD DESEADA POR EL USUARIO */
 const addToCart = (option, quantity) => {
     const found = products.find(product=>product.id === option)
-    if(InStock(quantity, found.stock)) {
-        cart += (quantity * found.price);
-        products[option-1].stock -= quantity;
-        alert(`${found.name} agregado al carrito`);
-    }
+    
 }
 
 /* ESTA FUNCION GENERA EL MENU DINÁMICO EN BASE A LOS PCTOS EXISTENTES 
